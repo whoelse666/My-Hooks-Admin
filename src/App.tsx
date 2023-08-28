@@ -34,21 +34,21 @@ const footerStyle: React.CSSProperties = {
   color: '#fff',
   backgroundColor: '#7dbcea',
 };
+const rootboxStyle: React.CSSProperties = {
+  height: "100vh",
+}
 
 function App() {
 
   return (
-    <>
-
+    <Layout className="root-box" style={rootboxStyle}>
+      <Sider style={siderStyle}>Sider</Sider>
       <Layout>
-        <Sider style={siderStyle}>Sider</Sider>
-        <Layout>
-          <Header style={headerStyle}>Header</Header>
-          <Content style={contentStyle}>Content</Content>
-          <Footer style={footerStyle}>Footer</Footer>
-        </Layout>
+        <Header style={headerStyle}>Header</Header>
+        <Content style={contentStyle}>Content</Content>
+        <Footer style={footerStyle}>Footer</Footer>
       </Layout>
-    </>
+    </Layout>
   )
 }
 
