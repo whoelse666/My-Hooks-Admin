@@ -1,10 +1,14 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+
+import React from 'react'
+// 定义路由规则
+import { Routes, Route, Link, NavLink, Navigate, Outlet } from 'react-router-dom'
 import './App.css'
 import { Layout, Space, Button } from 'antd';
-
+import Router from "@/routers/index";
 const { Header, Footer, Sider, Content } = Layout;
+// import Juejin from '@/views/link/juejin/index'
+// import Github from '@/views/link/github/index'
+
 const headerStyle: React.CSSProperties = {
   textAlign: 'center',
   color: '#fff',
@@ -38,17 +42,20 @@ const rootboxStyle: React.CSSProperties = {
   height: "100vh",
 }
 
-function App() {
-
+function App() { 
   return (
     <Layout className="root-box" style={rootboxStyle}>
-      <Sider style={siderStyle}>Sider</Sider>
+      <Sider style={siderStyle}> Sider
+      </Sider>
       <Layout>
         <Header style={headerStyle}>Header</Header>
-        <Content style={contentStyle}>Content</Content>
+        <Content style={contentStyle}>
+          <Router />
+          {/* <Outlet></Outlet> */}
+        </Content>
         <Footer style={footerStyle}>Footer</Footer>
       </Layout>
-    </Layout>
+    </Layout >
   )
 }
 
