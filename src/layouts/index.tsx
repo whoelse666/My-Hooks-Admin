@@ -1,38 +1,76 @@
-import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { Layout } from "antd";
-// import { setAuthButtons } from "@/redux/modules/auth/action";
-// import { updateCollapse } from "@/redux/modules/menu/action";
-// import { getAuthorButtons } from "@/api/modules/login";
-// import { connect } from "react-redux";
-import LayoutMenu from "./components/Menu";
-import LayoutHeader from "./components/Header";
-import LayoutTabs from "./components/Tabs";
-import LayoutFooter from "./components/Footer";
-import "./index.less";
+import React, { useRef } from "react"
+import { useEffect, useState } from "react"
+import { Routes, Route, Link, NavLink, Navigate, Outlet } from "react-router-dom"
+import { Button, Layout, Space } from "antd"
+const { Header, Footer, Sider, Content } = Layout
+
+import LayoutMenu from "./components/Menu"
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"
+
+const headerStyle: React.CSSProperties = {
+  textAlign: "center",
+  color: "#fff",
+  height: 64,
+  paddingInline: 50,
+  lineHeight: "64px",
+  backgroundColor: "#7dbcea",
+}
+
+const contentStyle: React.CSSProperties = {
+  textAlign: "center",
+  minHeight: 120,
+  lineHeight: "120px",
+  color: "#fff",
+  // backgroundColor: "#108ee9",
+}
+
+const siderStyle: React.CSSProperties = {
+  backgroundColor: "#ffffff",
+  overflowX: "hidden",
+  overflowY: "auto",
+  textAlign: "center",
+  // width: "200px !important",
+  lineHeight: "120px",
+  color: "#fff",
+}
+
+const footerStyle: React.CSSProperties = {
+  textAlign: "center",
+  color: "#fff",
+  backgroundColor: "#7dbcea",
+}
+const rootboxStyle: React.CSSProperties = {
+  height: "100vh",
+}
 
 const LayoutIndex = (props: any) => {
-  const { Sider, Content } = Layout;
-  const { isCollapse, /* updateCollapse, setAuthButtons */ } = props;
+  const { Sider, Content } = Layout
+  const [collapsed, setCollapsed] = useState(false)
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed)
+  }
+
   return (
-    // 这里不用 Layout 组件原因是切换页面时样式会先错乱然后在正常显示，造成页面闪屏效果
-    <section className="container">
-      <Sider trigger={null} collapsed={ isCollapse} width={220} theme="dark">
+    <Layout style={rootboxStyle}>
+      <Sider style={siderStyle} trigger={null} collapsible collapsed={collapsed}>
         <LayoutMenu></LayoutMenu>
       </Sider>
       <Layout>
-        <LayoutHeader></LayoutHeader>
-        <LayoutTabs></LayoutTabs>
-        <Content>
+        <Header style={headerStyle}>
+          <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </Button>
+        </Header>
+        <Content style={contentStyle}>
           <Outlet></Outlet>
         </Content>
-        <LayoutFooter></LayoutFooter>
+        {/* <Footer style={footerStyle}>Footer</Footer> */}
       </Layout>
-    </section>
-  );
-};
+    </Layout>
+  )
+}
 
-const mapStateToProps = (state: any) => state.menu;
+// const mapStateToProps = (state: any) => state.menu
 
 export default LayoutIndex
 // export default connect(mapStateToProps, mapDispatchToProps)(LayoutIndex);

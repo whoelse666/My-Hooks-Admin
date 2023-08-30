@@ -1,121 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Menu, Spin } from "antd";
-import { findAllBreadcrumb, getOpenKeys, handleRouter, searchRoute } from "@/utils/util";
-import { setMenuList } from "@/redux/modules/menu/action";
-import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
-import { setAuthRouter } from "@/redux/modules/auth/action";
-import { getMenuList } from "@/api/modules/login";
-import { connect } from "react-redux";
-import type { MenuProps } from "antd";
-import * as Icons from "@ant-design/icons";
-import Logo from "./components/Logo";
-import "./index.less";
+import React, { useState } from "react"
+import { AppstoreOutlined, ContainerOutlined, DesktopOutlined, MailOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined } from "@ant-design/icons"
+import type { MenuProps } from "antd"
+import { Button, Menu, Spin } from "antd"
 
-const LayoutMenu = (props: any) => {
-	const { pathname } = useLocation();
-	const { isCollapse, setBreadcrumbList, setAuthRouter, setMenuList: setMenuListAction } = props;
-	const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
-	const [openKeys, setOpenKeys] = useState<string[]>([]);
+type MenuItem = Required<MenuProps>["items"][number]
 
-	// 刷新页面菜单保持高亮
-	useEffect(() => {
-		setSelectedKeys([pathname]);
-		isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
-	}, [pathname, isCollapse]);
+function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode, children?: MenuItem[], type?: "group"): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as MenuItem
+}
 
-	// 设置当前展开的 subMenu
-	const onOpenChange = (openKeys: string[]) => {
-		if (openKeys.length === 0 || openKeys.length === 1) return setOpenKeys(openKeys);
-		const latestOpenKey = openKeys[openKeys.length - 1];
-		if (latestOpenKey.includes(openKeys[0])) return setOpenKeys(openKeys);
-		setOpenKeys([latestOpenKey]);
-	};
+const items: MenuItem[] = [
+  getItem("Option 1", "1", <PieChartOutlined />),
+  getItem("Option 2", "2", <DesktopOutlined />),
+  getItem("Option 3", "3", <ContainerOutlined />),
 
-	// 定义 menu 类型
-	type MenuItem = Required<MenuProps>["items"][number];
-	const getItem = (
-		label: React.ReactNode,
-		key?: React.Key | null,
-		icon?: React.ReactNode,
-		children?: MenuItem[],
-		type?: "group"
-	): MenuItem => {
-		return {
-			key,
-			icon,
-			children,
-			label,
-			type
-		} as MenuItem;
-	};
+  getItem("Navigation One", "sub1", <MailOutlined />, [getItem("Option 5", "5"), getItem("Option 6", "6"), getItem("Option 7", "7"), getItem("Option 8", "8")]),
 
-	// 动态渲染 Icon 图标
-	const customIcons: { [key: string]: any } = Icons;
-	const addIcon = (name: string) => {
-		return React.createElement(customIcons[name]);
-	};
+  getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
+    getItem("Option 9", "9"),
+    getItem("Option 10", "10"),
 
-	// 处理后台返回菜单 key 值为 antd 菜单需要的 key 值
-	const deepLoopFloat = (menuList: Menu.MenuOptions[], newArr: MenuItem[] = []) => {
-		menuList.forEach((item: Menu.MenuOptions) => {
-			// 下面判断代码解释 *** !item?.children?.length   ==>   (!item.children || item.children.length === 0)
-			if (!item?.children?.length) return newArr.push(getItem(item.title, item.path, addIcon(item.icon!)));
-			newArr.push(getItem(item.title, item.path, addIcon(item.icon!), deepLoopFloat(item.children)));
-		});
-		return newArr;
-	};
+    getItem("Submenu", "sub3", null, [getItem("Option 11", "11"), getItem("Option 12", "12")]),
+  ]),
+]
 
-	// 获取菜单列表并处理成 antd menu 需要的格式
-	const [menuList, setMenuList] = useState<MenuItem[]>([]);
-	const [loading, setLoading] = useState(false);
-	const getMenuData = async () => {
-		setLoading(true);
-		try {
-			const { data } = await getMenuList();
-			if (!data) return;
-			setMenuList(deepLoopFloat(data));
-			// 存储处理过后的所有面包屑导航栏到 redux 中
-			setBreadcrumbList(findAllBreadcrumb(data));
-			// 把路由菜单处理成一维数组，存储到 redux 中，做菜单权限判断
-			const dynamicRouter = handleRouter(data);
-			setAuthRouter(dynamicRouter);
-			setMenuListAction(data);
-		} finally {
-			setLoading(false);
-		}
-	};
-	useEffect(() => {
-		getMenuData();
-	}, []);
+const LayoutMenu: React.FC = () => {
+  const [loading, setLoading] = useState(true)
+  setTimeout(() => {
+    setLoading(false)
+  }, 1000)
+  return (
+    <div style={{ width: "100%" }} className="menu">
+      <Spin spinning={loading} tip="Loading...">
+        <Menu defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} theme="light" mode="inline" triggerSubMenuAction="click" items={items}></Menu>
+      </Spin>
+    </div>
+  )
+}
 
-	// 点击当前菜单跳转页面
-	const navigate = useNavigate();
-	const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => {
-		const route = searchRoute(key, props.menuList);
-		if (route.isLink) window.open(route.isLink, "_blank");
-		navigate(key);
-	};
-
-	return (
-		<div className="menu">
-			<Spin spinning={loading} tip="Loading...">
-				<Logo></Logo>
-				<Menu
-					theme="dark"
-					mode="inline"
-					triggerSubMenuAction="click"
-					openKeys={openKeys}
-					selectedKeys={selectedKeys}
-					items={menuList}
-					onClick={clickMenu}
-					onOpenChange={onOpenChange}
-				></Menu>
-			</Spin>
-		</div>
-	);
-};
-
-const mapStateToProps = (state: any) => state.menu;
-const mapDispatchToProps = { setMenuList, setBreadcrumbList, setAuthRouter };
-export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu);
+export default LayoutMenu
