@@ -12,24 +12,6 @@ const assemblyRouter: Array<RouteObject> = [
 		},
 		children: [
 			{
-				path: "/assembly/guide",
-				element: lazyLoad(React.lazy(() => import("@/views/assembly/guide/index"))),
-				meta: {
-					requiresAuth: true,
-					title: "引导页",
-					key: "guide"
-				}
-			},
-			{
-				path: "/assembly/svgIcon",
-				element: lazyLoad(React.lazy(() => import("@/views/assembly/svgIcon/index"))),
-				meta: {
-					requiresAuth: true,
-					title: "SVG 图标",
-					key: "svgIcon"
-				}
-			},
-			{
 				path: "/assembly/selectIcon",
 				element: lazyLoad(React.lazy(() => import("@/views/assembly/selectIcon/index"))),
 				meta: {

@@ -2,7 +2,7 @@ import "./index.less";
 
 const SelectIcon = () => {
 	return (
-		<div className="card content-box">
+		<div className="content-box">
 			<span className="text">SelectIcon 🍓🍇🍈🍉</span>
 		</div>
 	);
