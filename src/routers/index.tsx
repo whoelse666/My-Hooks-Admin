@@ -10,6 +10,18 @@ import Github from '@/views/link/github/index'
 import Home from "@/views/home/index"
 import Login from '@/views/login/index'
  
+
+
+// * 导入所有router
+const metaRouters = import.meta.globEager("./modules/*.tsx");
+
+// * 处理路由
+export const routerArray: RouteObject[] = [];
+Object.keys(metaRouters).forEach(item => {
+	Object.keys(metaRouters[item]).forEach((key: any) => {
+		routerArray.push(...metaRouters[item][key]);
+	});
+});
 export const rootRouter = [
   {
     path: "/",
@@ -53,7 +65,7 @@ export const rootRouter = [
       key: "login",
     },
   },
-  // ...routerArray,
+  ...routerArray,
   {
     path: "*",
     element: <Navigate to="/404" />,

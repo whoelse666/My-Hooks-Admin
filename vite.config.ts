@@ -13,12 +13,12 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
   return {
     resolve: {
       alias: {
-        '@': resolve(__dirname, './src')
-      }
+        "@": resolve(__dirname, "./src"),
+      },
     },
     // server config
     server: {
-      host: '0.0.0.0', // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
+      host: "0.0.0.0", // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
       hmr: { overlay: false }, //可以禁用开发服务器错误的屏蔽。
       port: viteEnv.VITE_PORT,
       // open: viteEnv.VITE_OPEN,
@@ -26,16 +26,16 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
       // https: false,
       // 代理跨域（mock 不需要配置，这里只是个事列）
       proxy: {
-        '/api': {
-          target: 'https://mock.mengxuegu.com/mock/62abda3212c1416424630a45', // easymock
+        "/api": {
+          target: "https://mock.mengxuegu.com/mock/62abda3212c1416424630a45", // easymock
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, '')
-        }
-      }
+          rewrite: path => path.replace(/^\/api/, ""),
+        },
+      },
     },
     // plugins
     plugins: [
-      react()
+      react(),
       // createHtmlPlugin({
       //   inject: {
       //     data: {
@@ -58,13 +58,13 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
       //   })
     ],
     esbuild: {
-      pure: viteEnv.VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : []
+      pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : [],
     },
     // build configure
     build: {
-      outDir: 'dist',
+      outDir: "dist",
       // esbuild 打包更快，但是不能去除 console.log，去除 console 使用 terser 模式
-      minify: 'esbuild',
+      minify: "esbuild",
       // minify: "terser",
       // terserOptions: {
       // 	compress: {
@@ -75,11 +75,11 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
       rollupOptions: {
         output: {
           // Static resource classification and packaging
-          chunkFileNames: 'assets/js/[name]-[hash].js',
-          entryFileNames: 'assets/js/[name]-[hash].js',
-          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
-        }
-      }
-    }
-  };
+          chunkFileNames: "assets/js/[name]-[hash].js",
+          entryFileNames: "assets/js/[name]-[hash].js",
+          assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
+        },
+      },
+    },
+  }
 });
