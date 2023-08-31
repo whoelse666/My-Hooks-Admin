@@ -35,6 +35,7 @@ const LoginForm = (props: any) => {
       // setTabsList([])
       message.success("登录成功！")
       navigate(HOME_URL)
+      // navigate('/')
     } finally {
       setLoading(false)
     }

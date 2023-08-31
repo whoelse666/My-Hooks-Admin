@@ -1,4 +1,4 @@
-import { Navigate, useRoutes, BrowserRouter  } from "react-router-dom";
+import { Navigate, useRoutes,   } from "react-router-dom";
 // 定义当前项目的路由模式
  import React from 'react'
 import { LayoutIndex } from "@/routers/constant";
