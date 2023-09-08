@@ -9,7 +9,6 @@ import menu from "./modules/menu/reducer";
 import tabs from "./modules/tabs/reducer";
 import auth from "./modules/auth/reducer";
 import breadcrumb from "./modules/breadcrumb/reducer";
-
 // 创建reducer(拆分reducer)
 const reducer = combineReducers({
 	global,
