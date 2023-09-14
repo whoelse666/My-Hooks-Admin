@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Layout } from "antd"
 const { Header, Footer, Sider, Content } = Layout
-function Layout() {
+function LayoutIndex() {
   // const [count, setCount] = useState(0)
 
   return (
@@ -18,4 +18,4 @@ function Layout() {
   )
 }
 
-export default Layout
+export default LayoutIndex
