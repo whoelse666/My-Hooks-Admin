@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-		"start:dev": "vite --mode development",
+    "start:dev": "vite --mode development",
 		"build:dev": "tsc && vite build --mode development",
 		"build:test": "tsc && vite build --mode test",
 		"build:pro": "tsc && vite build --mode production",
-		"preview": "vite preview"
+		"preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.5",
