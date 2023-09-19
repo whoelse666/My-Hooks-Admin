@@ -1,20 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react"
-import { Button, Checkbox, Form, Input } from "antd";
+import { useNavigate } from "react-router-dom";
+import md5 from "js-md5";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import { UserOutlined, LockOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { loginApi } from "@/api/login";
 // import { useTranslation } from "react-i18next";
 import './loginform.scss'
 import Xue from "@/assets/images/xue3.jpg";
 import loginLeft from "@/assets/images/login_left.png";
- 
+
 const LoginForm: React.FC = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState<boolean>(false);
   // const { t } = useTranslation();
-   type FieldType = {
-    username?: string;
-    password?: string;
+  type FieldType = {
+    username: string;
+    password: string | number;
     remember?: string;
   };
 
@@ -22,12 +25,17 @@ const LoginForm: React.FC = () => {
     console.log('Failed:', errorInfo);
   };
   // 登录
-  const onFinish = async (loginParams: any) => {
-    console.log('loginParams', loginParams)
+  const onFinish = async (loginForm: any) => {
+    console.log('loginForm', loginForm)
     try {
       setLoading(true);
-      const { data } = await loginApi(loginParams);
-      console.log('data', data)
+      loginForm.password = md5(loginForm.password);
+      const { data } = await loginApi(loginForm);
+      message.success("登录成功！");
+
+      // dispatch(setToken(data!.access_token));
+      // dispatch(setTabsList([]));
+      navigate("/");
     } finally {
       setLoading(false);
     }
@@ -43,18 +51,17 @@ const LoginForm: React.FC = () => {
           <span className="logo-text">Hooks-Admin</span>
         </div>
         <Form
-          form={form}
           labelCol={{ span: 5 }}
-          initialValues={{ remember: true }}
+          initialValues={{ username: 'admin', password: '123456', remember: true }}
           size="large"
           autoComplete="off"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <Form.Item name="username" rules={[{ required: true, message: "请输入用户名" }]}>
+          <Form.Item name="username" rules={[{ required: false, message: "请输入用户名" }]}>
             <Input placeholder="用户名：admin / user" prefix={<UserOutlined />} />
           </Form.Item>
-          <Form.Item name="password" rules={[{ required: true, message: "请输入密码" }]}>
+          <Form.Item name="password" rules={[{ required: false, message: "请输入密码" }]}>
             <Input.Password autoComplete="new-password" placeholder="密码：123456" prefix={<LockOutlined />} />
           </Form.Item>
           <Form.Item<FieldType>
@@ -84,9 +91,6 @@ const LoginForm: React.FC = () => {
       </div>
     </div>
   </div>
-
-
-
 }
 
 

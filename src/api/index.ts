@@ -14,7 +14,7 @@ NProgress.configure({
 // export default NProgress;
 
 const instance = axios.create({
-  baseURL: "https://some-domain.com/api/",
+  baseURL: "http://192.168.137.1:5179/api/",
   timeout: 1000,
   // 自定义请求头
   headers: { "X-Requested-With": "XMLHttpRequest" },
@@ -26,7 +26,7 @@ instance.interceptors.request.use(
     // * 如果当前请求不需要显示 loading,在api服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
     // config.headers!.noLoading || showFullScreenLoading();
     // const token: string = store.getState().global.token;
-    // return { ...config, headers: { ...config.headers, "x-access-token": token } };
+     return { ...config, headers: { ...config.headers, "x-access-token": 'bqddxxwqmfncffacvbpkuxvwvqrhln' } };
     return config
   },
   function (error) {

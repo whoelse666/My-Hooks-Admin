@@ -1,12 +1,16 @@
-import { Navigate, useRoutes } from "react-router-dom"
+import { /* Navigate, */ useRoutes } from "react-router-dom"
 import NotFound from "@/views/NotFound/";
 import Login from "@/views/login/index";
 import LayoutIndex from "@/LayoutIndex"
 
 export const rootRouter = [
   {
+    path: "/home/index",
+    element: <LayoutIndex />,
+  },
+  {
     path: "/",
-    element: <LayoutIndex/>,
+    element: <LayoutIndex />,
   },
   {
     path: "/login",
