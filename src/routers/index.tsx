@@ -2,15 +2,22 @@ import { /* Navigate, */ useRoutes } from "react-router-dom"
 import NotFound from "@/views/NotFound/";
 import Login from "@/views/login/index";
 import LayoutIndex from "@/LayoutIndex"
+import TodoList from "@/views/demo/TodoList"
 
 export const rootRouter = [
+
+  {
+    path: "/",
+    element: <LayoutIndex />,
+  },
+
   {
     path: "/home/index",
     element: <LayoutIndex />,
   },
   {
-    path: "/",
-    element: <LayoutIndex />,
+    path: "/reduxtest",
+    element: <TodoList />,
   },
   {
     path: "/login",
