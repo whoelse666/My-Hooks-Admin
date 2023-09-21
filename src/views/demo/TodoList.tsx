@@ -11,7 +11,7 @@ import {
   todoAdded, todoToggled, selectTodos
 } from '@/redux/reducers/todosSlice';
 import styles from './Counter.module.css';
-
+ 
 function TodoList() {
   const count = useSelector(selectCount);
   const todos = useSelector(selectTodos);
@@ -62,6 +62,29 @@ function TodoList() {
 
       <div className={styles.border}>
         <h3>todosSlice</h3>
+        <div> 
+          <button
+            className={styles.button}
+            onClick={() =>
+              dispatch(todoAdded({
+                id: todos.length + 1,
+                text: '天外来物',
+                completed: false
+              }))
+            }
+          >
+            add item
+          </button>
+          <button
+            className={styles.asyncButton}
+            onClick={() => {
+              console.log('todos.length', todos.length)
+              dispatch(todoToggled(Math.ceil(Math.random() * todos.length)))
+            }}
+          >
+            find by id
+          </button>
+        </div>
         <div>
           {todos.map(item => {
             return (<p key={item.id}>
@@ -71,27 +94,7 @@ function TodoList() {
           )}
         </div>
 
-        <button
-          className={styles.button}
-          onClick={() =>
-            dispatch(todoAdded({
-              id: todos.length + 1,
-              text: '天外来物',
-              completed: false
-            }))
-          }
-        >
-          add item
-        </button>
-        <button
-          className={styles.asyncButton}
-          onClick={() => {
-            console.log('todos.length', todos.length)
-            dispatch(todoToggled(Math.ceil(Math.random() * todos.length)))
-          }}
-        >
-          find by id
-        </button>
+    
       </div>
     </div>
   );
