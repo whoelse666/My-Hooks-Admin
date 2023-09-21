@@ -10,8 +10,16 @@ import './loginform.scss'
 import Xue from "@/assets/images/xue3.jpg";
 import loginLeft from "@/assets/images/login_left.png";
 
+import {  useDispatch } from 'react-redux';
+
+import {
+  setToken,
+} from '@/redux/reducers/tokenSlice';
+ 
+
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState<boolean>(false);
   // const { t } = useTranslation();
@@ -32,7 +40,7 @@ const LoginForm: React.FC = () => {
       loginForm.password = md5(loginForm.password);
       const { data } = await loginApi(loginForm);
       message.success("登录成功！");
-
+      dispatch(setToken({key:'token',value:data!.access_token}));
       // dispatch(setToken(data!.access_token));
       // dispatch(setTabsList([]));
       navigate("/");

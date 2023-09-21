@@ -10,6 +10,9 @@ import {
 import {
   todoAdded, todoToggled, selectTodos
 } from '@/redux/reducers/todosSlice';
+
+
+ 
 import styles from './Counter.module.css';
  
 function TodoList() {
@@ -17,7 +20,6 @@ function TodoList() {
   const todos = useSelector(selectTodos);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
-  console.log('todos', todos)
   return (
     <div style={{ color: 'black',backgroundColor:'#ffffff',height:'100%' }}>
       <div className={styles.row}>

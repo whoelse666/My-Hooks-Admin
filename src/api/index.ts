@@ -3,6 +3,15 @@ import axios /* AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse */ 
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 
+import {
+  store
+} from '@/redux/store';
+ 
+import {
+  getToken
+} from '@/redux/reducers/tokenSlice';
+ 
+
 NProgress.configure({
   easing: "ease", // 动画方式
   speed: 500, // 递增进度条的速度
@@ -26,7 +35,12 @@ instance.interceptors.request.use(
     // * 如果当前请求不需要显示 loading,在api服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
     // config.headers!.noLoading || showFullScreenLoading();
     // const token: string = store.getState().global.token;
-     return { ...config, headers: { ...config.headers, "x-access-token": 'bqddxxwqmfncffacvbpkuxvwvqrhln' } };
+    const token = store.getState().tokenStore.token;
+    console.log('store999',  store.dispatch(getToken('token')))
+     
+    console.log('token',config.url, token)
+// bqddxxwqmfncffacvbpkuxvwvqrhln
+   return { ...config, headers: { ...config.headers, "x-access-token": token  } };
     return config
   },
   function (error) {
