@@ -22,13 +22,13 @@ export const counterSlice = createSlice({
 export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
  
-export const incrementAsync = (amount) => (dispatch) => {
+export const incrementAsync = (amount:number) => (dispatch:(payload:any)=>void) => {
   setTimeout(() => {
     dispatch(incrementByAmount(amount))
   }, 1000)
 }
 
  
-export const selectCount = (state) => state.counter.value
+export const selectCount = (state:any) => state.counter.value
 
 export default counterSlice.reducer
