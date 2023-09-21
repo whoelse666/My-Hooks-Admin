@@ -19,7 +19,7 @@ function TodoList() {
   const [incrementAmount, setIncrementAmount] = useState('2');
   console.log('todos', todos)
   return (
-    <div style={{ color: 'black' }}>
+    <div style={{ color: 'black',backgroundColor:'#ffffff',height:'100%' }}>
       <div className={styles.row}>
         <button
           className={styles.button}

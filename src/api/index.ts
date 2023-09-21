@@ -14,7 +14,7 @@ NProgress.configure({
 // export default NProgress;
 
 const instance = axios.create({
-  baseURL: "http://192.168.137.1:5179/api/",
+  baseURL: "http://localhost:5179/api/",
   timeout: 1000,
   // 自定义请求头
   headers: { "X-Requested-With": "XMLHttpRequest" },
