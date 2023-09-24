@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useLocation, } from "react-router-dom";
-
+import { getMenuList } from "@/api/login";
+ 
 import type { MenuProps, } from 'antd';
 import {/*  Button, */ Menu, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +39,7 @@ export const getOpenKeys = (path: string) => {
   }
   return newArr;
 };
-import { getMenuList } from "@/api/login";
+
 
 
 const MenuTree: React.FC = () => {

@@ -36,9 +36,9 @@ instance.interceptors.request.use(
     // config.headers!.noLoading || showFullScreenLoading();
     // const token: string = store.getState().global.token;
     const token = store.getState().tokenStore.token;
-    console.log('store999',  store.dispatch(getToken('token')))
-     
-    console.log('token',config.url, token)
+//     if(!token){
+// window.location.href = "/login";
+//     }
 // bqddxxwqmfncffacvbpkuxvwvqrhln
    return { ...config, headers: { ...config.headers, "x-access-token": token  } };
     return config

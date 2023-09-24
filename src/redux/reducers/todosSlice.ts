@@ -38,6 +38,6 @@ reducers：一个对象，其中键是字符串，值是处理特定 actions 的
 })
 export const selectTodos = (state) => state.todos.list
 export const { todoAdded, todoToggled } = todosSlice.actions;
-console.log(todoToggled(2))
+ 
 // {type: 'todos/todoToggled', payload: 42}
 export default todosSlice.reducer

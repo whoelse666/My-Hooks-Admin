@@ -12,6 +12,7 @@ const tokenSlice = createSlice({
     },
     getToken: (state, action) : any => {
       const tokenKey = action.payload;
+      console.log('sessionStorage.getItem(tokenKey) ', sessionStorage.getItem(tokenKey) )
       return   sessionStorage.getItem(tokenKey) 
     },
     removeToken: (state, action) => {
