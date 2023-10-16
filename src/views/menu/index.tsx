@@ -4,7 +4,7 @@ import { useLocation, } from "react-router-dom";
 import { getMenuList } from "@/api/login";
 import "./index.less";
 import type { MenuProps, } from 'antd';
-import {/*  Button, */ Menu, Spin } from 'antd';
+import {/*  Button, */ Button, Menu, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import * as Icons from "@ant-design/icons";
 import { RootState, useDispatch, useSelector } from "react-redux";
@@ -47,19 +47,22 @@ export const getOpenKeys = (path: string) => {
 
 const MenuTree: React.FC = () => {
   const { pathname } = useLocation();
-  const isCollapse = null;
+
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   // 获取菜单列表并处理成 antd menu 需要的格式
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
   // const { menuList: reduxMenuList } = useSelector((state: RootState) => state.menu);
   const [loading, setLoading] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
-
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
   // 刷新页面菜单保持高亮
   useEffect(() => {
     setSelectedKeys([pathname]);
-    isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
-  }, [pathname, isCollapse]);
+    collapsed ? null : setOpenKeys(getOpenKeys(pathname));
+  }, [pathname, collapsed]);
 
   const getMenuData = async () => {
     setLoading(true);
@@ -92,9 +95,6 @@ const MenuTree: React.FC = () => {
     return newArr;
   };
 
-  // const toggleCollapsed = () => {
-  //   setCollapsed(!collapsed);
-  // };
 
   const searchRoute = (path: string, routes = []) => {
     let result = {};
@@ -125,41 +125,74 @@ const MenuTree: React.FC = () => {
     setOpenKeys([latestOpenKey]);
   };
 
-  return (
 
-    <Spin spinning={loading} tip="Loading...">
-      {/* <Logo isCollapse={isCollapse}></Logo> */}
-      {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </Button> */}
+  type MenuItem = Required<MenuProps>['items'][number];
+
+  function getItem(
+    label: React.ReactNode,
+    key: React.Key,
+    icon?: React.ReactNode,
+    children?: MenuItem[],
+    type?: 'group',
+  ): MenuItem {
+    return {
+      key,
+      icon,
+      children,
+      label,
+      type,
+    } as MenuItem;
+  }
+
+  const items: MenuItem[] = [
+    getItem('Option 1', '1', <Icons.PieChartOutlined />),
+    getItem('Option 2', '2', <Icons.DesktopOutlined />),
+    getItem('Option 3', '3', <Icons.ContainerOutlined />),
+
+    getItem('Navigation One', 'sub1', <Icons.MailOutlined />, [
+      getItem('Option 5', '5'),
+      getItem('Option 6', '6'),
+      getItem('Option 7', '7'),
+      getItem('Option 8', '8'),
+    ]),
+
+    getItem('Navigation Two', 'sub2', <Icons.AppstoreOutlined />, [
+      getItem('Option 9', '9'),
+      getItem('Option 10', '10'),
+
+      getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
+    ]),
+  ];
+  return (
+    <>
+      {/* <Spin spinning={loading} tip="Loading..."  > */}
+      <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
+        {collapsed ? <Icons.MenuUnfoldOutlined /> : <Icons.MenuFoldOutlined />}
+      </Button>
       <div className="logo-box">
         <img src={logo} alt="logo" className="logo-img" />
-        {!isCollapse ? <h2 className="logo-text">Hooks Admin</h2> : null}
+        {!collapsed ? <h2 className="logo-text">Hooks Admin</h2> : null}
       </div>
       <Menu
-        theme="dark"
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
         mode="inline"
+        theme="dark"
+        inlineCollapsed={collapsed}
+        items={items}
+      />
+      {/* <Menu
+        theme="dark"
+        mode="inline" inlineCollapsed={collapsed}
         triggerSubMenuAction="click"
         openKeys={openKeys}
         selectedKeys={selectedKeys}
         items={menuList}
         onClick={clickMenu}
         onOpenChange={onOpenChange}
-      ></Menu>
-    </Spin>
-
-
-
-    // <Menu
-    //   defaultSelectedKeys={['1']}
-    //   defaultOpenKeys={['sub1']} onClick={clickMenu}
-    //   onOpenChange={onOpenChange} triggerSubMenuAction="click"
-    //   mode="inline"
-    //   theme="dark" openKeys={openKeys}
-    //   inlineCollapsed={collapsed}
-    //   items={items}
-    // />
-
+      ></Menu> */}
+      {/*  </Spin> */}
+    </>
   );
 };
 
