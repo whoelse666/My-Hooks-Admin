@@ -4,19 +4,19 @@ import { Outlet  } from "react-router-dom";
 
 const { Header, Footer, Sider, Content } = Layout
 
-import '@/styles/layout.scss';
+import '@/styles/layout.less';
 import HeaderCom from '@/views/header'
 import MenuTree from '@/views/menu'
 function LayoutIndex() {
   return (
   <>
       <Layout>
-        <Sider style={{'borderRight':'1px solid pink'}}>
+        <Sider>
           <MenuTree />
         </Sider>
         <Layout>
           <Header><HeaderCom /></Header>
-          <Content>Content
+          <Content>
             <Outlet></Outlet>
           </Content>
           <Footer>Footer</Footer>

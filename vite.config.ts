@@ -39,9 +39,13 @@ export default defineConfig((mode: ConfigEnv) => {
     },
     css: {
       preprocessorOptions: {
-        scss: {
-          additionalData: '@import "@/styles/gobal.scss";',
-        },
+        less: {
+					// modifyVars: {
+					// 	"primary-color": "#1DA57A",
+					// },
+          javascriptEnabled: true,
+              additionalData: '@import "@/styles/gobal.less";',
+				}
       },
     },
     server: {

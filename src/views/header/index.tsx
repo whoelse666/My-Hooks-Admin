@@ -9,6 +9,7 @@ import { useRef, useState } from 'react';
 import {
   setToken,
 } from '@/redux/reducers/tokenSlice';
+import type { MenuProps } from 'antd';
 
 const HOME_URL: string = "/";
 const Header: React.FC = () => {
@@ -43,42 +44,39 @@ const Header: React.FC = () => {
     setIsModalOpen(false);
   };
   // Dropdown Menu
-  const menu = (
-    <Menu
-      items={[
-        {
-          key: "1",
-          label: <span className="dropdown-item">首页</span>,
-          onClick: () => navigate(HOME_URL)
-        },
-        {
-          key: "2",
-          label: <span className="dropdown-item">个人信息</span>,
-          onClick: () => { setIsModalOpen(true); }
-        },
-        {
-          key: "3",
-          label: <span className="dropdown-item">修改密码</span>,
-          onClick: () => { setIsModalOpen(true); }
-        },
-        {
-          type: "divider" //分割线
-        },
-        {
-          key: "4",
-          label: <span className="dropdown-item">退出登录</span>,
-          onClick: logout
-        }
-      ]}
-    ></Menu>
-  );
+  const items: MenuProps['items'] = [
+    {
+      key: "1",
+      label: <span className="dropdown-item">首页</span>,
+      onClick: () => navigate(HOME_URL)
+    },
+    {
+      key: "2",
+      label: <span className="dropdown-item">个人信息</span>,
+      onClick: () => { setIsModalOpen(true); }
+    },
+    {
+      key: "3",
+      label: <span className="dropdown-item">修改密码</span>,
+      onClick: () => { setIsModalOpen(true); }
+    },
+    {
+      type: "divider" //分割线
+    },
+    {
+      key: "4",
+      label: <span className="dropdown-item">退出登录</span>,
+      onClick: logout
+    }
+  ]
+
 
 
   return (
     <Row>
       <Col span={1}>首页</Col>
       <Col span={1} offset={22}>
-        <Dropdown menu={menu} placement="bottom" arrow trigger={["click"]}>
+        <Dropdown menu={{ items }} placement="bottom" arrow trigger={["click"]}>
           <Badge count={1}>
             <Avatar style={{ backgroundColor: '#1677ff' }} icon={<UserOutlined />} />
           </Badge>

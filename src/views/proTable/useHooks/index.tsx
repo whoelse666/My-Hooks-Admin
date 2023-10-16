@@ -74,9 +74,9 @@ const UseHooks = () => {
       </div>
       <div className="auth">
         <Space>
-          <Button type="primary">我是 Admin && User 能看到的按钮</Button>
-          <Button type="primary">我是 Admin 能看到的按钮</Button>
-          <Button type="primary">我是 User 能看到的按钮</Button>
+          <Button type="primary">Admin && User </Button>
+          <Button type="primary"> Admin </Button>
+          <Button type="primary"> User </Button>
         </Space>
       </div>
       <Table dataSource={dataSource} columns={columns} />

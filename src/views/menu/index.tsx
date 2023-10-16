@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, } from "react-router-dom";
 import { getMenuList } from "@/api/login";
-
+import "./index.less";
 import type { MenuProps, } from 'antd';
 import {/*  Button, */ Menu, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import * as Icons from "@ant-design/icons";
 import { RootState, useDispatch, useSelector } from "react-redux";
 type MenuItem = Required<MenuProps>['items'][number];
+import logo from "@/assets/images/logo.png";
+
 
 function getItem(
   label: React.ReactNode,
@@ -130,6 +132,10 @@ const MenuTree: React.FC = () => {
       {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button> */}
+      <div className="logo-box">
+        <img src={logo} alt="logo" className="logo-img" />
+        {!isCollapse ? <h2 className="logo-text">Hooks Admin</h2> : null}
+      </div>
       <Menu
         theme="dark"
         mode="inline"
