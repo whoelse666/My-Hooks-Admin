@@ -78,7 +78,7 @@ const Header: React.FC = () => {
     <Row>
       <Col span={1}>首页</Col>
       <Col span={1} offset={22}>
-        <Dropdown overlay={menu} placement="bottom" arrow trigger={["click"]}>
+        <Dropdown menu={menu} placement="bottom" arrow trigger={["click"]}>
           <Badge count={1}>
             <Avatar style={{ backgroundColor: '#1677ff' }} icon={<UserOutlined />} />
           </Badge>

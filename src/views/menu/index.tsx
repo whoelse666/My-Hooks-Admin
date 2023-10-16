@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, } from "react-router-dom";
 import { getMenuList } from "@/api/login";
- 
+
 import type { MenuProps, } from 'antd';
 import {/*  Button, */ Menu, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import * as Icons from "@ant-design/icons";
+import { RootState, useDispatch, useSelector } from "react-redux";
 type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
@@ -44,11 +45,11 @@ export const getOpenKeys = (path: string) => {
 
 const MenuTree: React.FC = () => {
   const { pathname } = useLocation();
-
-  const isCollapse = null; 
+  const isCollapse = null;
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   // 获取菜单列表并处理成 antd menu 需要的格式
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
+  // const { menuList: reduxMenuList } = useSelector((state: RootState) => state.menu);
   const [loading, setLoading] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
 
@@ -64,7 +65,7 @@ const MenuTree: React.FC = () => {
       const { data } = await getMenuList();
       if (!data) return;
       setMenuList(deepLoopFloat(data));
- 
+
     } finally {
       setLoading(false);
     }
@@ -109,7 +110,7 @@ const MenuTree: React.FC = () => {
   // 点击当前菜单跳转页面
   const navigate = useNavigate();
   const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => {
-    const route = searchRoute(key, reduxMenuList);
+    const route = searchRoute(key, menuList);
     if (route.isLink) window.open(route.isLink, "_blank");
     navigate(key);
   };
