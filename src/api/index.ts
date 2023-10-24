@@ -5,7 +5,7 @@ import "nprogress/nprogress.css"
 
 import {
   store
-} from '@/redux/store';
+} from '@/redux';
  
 import {
   getToken

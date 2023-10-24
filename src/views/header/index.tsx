@@ -1,21 +1,29 @@
 import { UserOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
-
-
 import { useNavigate } from "react-router-dom";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Avatar, Modal, Menu, Badge, Col, Row, Dropdown, message, } from 'antd';
+import { Avatar, Modal, Menu, Badge, Col, Row, Dropdown, message,Button,  } from 'antd';
 import { useRef, useState } from 'react';
 import {
   setToken,
 } from '@/redux/reducers/tokenSlice';
 import type { MenuProps } from 'antd';
+ 
+import * as Icons from "@ant-design/icons";
+
+// import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { updateCollapse } from "@/redux/modules/menu";
+import {   useDispatch, useSelector } from "@/redux";
+
 
 const HOME_URL: string = "/";
 const Header: React.FC = () => {
-  const dispatch = useDispatch();
+  	const dispatch = useDispatch();
+	const { isCollapse } = useSelector((state:any) => state.menu);
   const navigate = useNavigate();
+  const toggleCollapsed = () => {
+   				dispatch(updateCollapse(!isCollapse));
 
+  };
   // 退出登录
   const logout = () => {
     Modal.confirm({
@@ -71,10 +79,13 @@ const Header: React.FC = () => {
   ]
 
 
-
   return (
     <Row>
-      <Col span={1}>首页</Col>
+      <Col span={1}>
+         <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
+        {isCollapse ? <Icons.MenuUnfoldOutlined /> : <Icons.MenuFoldOutlined />}
+      </Button>
+      </Col>
       <Col span={1} offset={22}>
         <Dropdown menu={{ items }} placement="bottom" arrow trigger={["click"]}>
           <Badge count={1}>

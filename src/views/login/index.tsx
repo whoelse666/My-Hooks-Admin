@@ -6,7 +6,7 @@ import { Button, Checkbox, Form, Input, message } from "antd";
 import { UserOutlined, LockOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { loginApi } from "@/api/login";
 // import { useTranslation } from "react-i18next";
-import './loginform.scss'
+import './loginform.less'
 import Xue from "@/assets/images/xue3.jpg";
 import loginLeft from "@/assets/images/login_left.png";
 

@@ -35,6 +35,7 @@
     "react-transition-group": "^4.4.2",
     "redux-persist": "^6.0.0",
     "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.4.1",
     "screenfull": "^6.0.2"
   },
   "devDependencies": {
@@ -63,7 +64,6 @@
     "postcss": "^8.4.14",
     "prettier": "^2.6.2",
     "rollup-plugin-visualizer": "^5.6.0",
- 
     "standard-version": "^9.5.0",
     "stylelint": "^14.9.1",
     "stylelint-config-prettier": "^9.0.3",
