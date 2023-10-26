@@ -6,10 +6,10 @@ import {
   incrementByAmount,
   incrementAsync,
   selectCount,
-} from '@/redux/reducers/counterSlice';
+} from '@/redux/modules/counterSlice';
 import {
   todoAdded, todoToggled, selectTodos
-} from '@/redux/reducers/todosSlice';
+} from '@/redux/modules/todosSlice';
 
 
  

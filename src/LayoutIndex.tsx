@@ -1,17 +1,17 @@
 import React from "react"
 import { ConfigProvider, Layout } from "antd"
-import { Outlet  } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-const { Header, Footer,  Content } = Layout
+const { Header, Footer, Content } = Layout
 
 import '@/styles/layout.less';
 import HeaderCom from '@/views/header'
 import MenuTree from '@/views/menu'
 function LayoutIndex() {
   return (
-  <>
+    <>
       <Layout>
-          <MenuTree />
+        <MenuTree />
         <Layout>
           <Header><HeaderCom /></Header>
           <Content>
@@ -20,7 +20,7 @@ function LayoutIndex() {
           <Footer>Footer</Footer>
         </Layout>
       </Layout>
-</>
+    </>
   )
 }
 

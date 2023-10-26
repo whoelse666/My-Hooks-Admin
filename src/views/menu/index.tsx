@@ -4,10 +4,10 @@ import { useLocation, } from "react-router-dom";
 import { getMenuList } from "@/api/login";
 import "./index.less";
 import type { MenuProps, } from 'antd';
-import {  Button, Menu, Spin } from 'antd';
+import { Button, Menu, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import * as Icons from "@ant-design/icons";
-import { useDispatch, useSelector  } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 type MenuItem = Required<MenuProps>['items'][number];
 import logo from "@/assets/images/logo.png";
 import Sider from "antd/es/layout/Sider";
@@ -48,14 +48,16 @@ export const getOpenKeys = (path: string) => {
 
 const MenuTree: React.FC = () => {
   const { pathname } = useLocation();
-const { isCollapse } = useSelector((state: any) => state.menu);
+  const { isCollapse } = useSelector((state: any) => {
+    return state.menu
+  });
+
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   // 获取菜单列表并处理成 antd menu 需要的格式
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
-  // const { menuList: reduxMenuList } = useSelector((state: any) => state.menu);
   const [loading, setLoading] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
-  
+
   // 刷新页面菜单保持高亮
   useEffect(() => {
     setSelectedKeys([pathname]);
@@ -142,26 +144,26 @@ const { isCollapse } = useSelector((state: any) => state.menu);
     } as MenuItem;
   }
 
- 
+
   return (
-       <Sider trigger={null} collapsed={isCollapse}  theme="dark">
+    <Sider trigger={null} collapsed={isCollapse} theme="dark">
       <Spin spinning={loading} tip="Loading..."  >
-      <div className="logo-box">
-        <img src={logo} alt="logo" className="logo-img" />
-        {!isCollapse ? <h2 className="logo-text">Hooks Admin</h2> : null}
-      </div>
-  <Menu
-        theme="dark"
-        mode="inline" 
-        triggerSubMenuAction="click"
-        openKeys={openKeys}
-        selectedKeys={selectedKeys}
-        items={menuList}
-        onClick={clickMenu}
-        onOpenChange={onOpenChange}
-      ></Menu>  
-       </Spin>
-  			</Sider>
+        <div className="logo-box">
+          <img src={logo} alt="logo" className="logo-img" />
+          {!isCollapse ? <h2 className="logo-text">Hooks Admin</h2> : null}
+        </div>
+        <Menu
+          theme="dark"
+          mode="inline"
+          triggerSubMenuAction="click"
+          openKeys={openKeys}
+          selectedKeys={selectedKeys}
+          items={menuList}
+          onClick={clickMenu}
+          onOpenChange={onOpenChange}
+        ></Menu>
+      </Spin>
+    </Sider>
 
   );
 };

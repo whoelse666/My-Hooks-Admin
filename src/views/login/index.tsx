@@ -14,7 +14,7 @@ import {  useDispatch } from 'react-redux';
 
 import {
   setToken,
-} from '@/redux/reducers/tokenSlice';
+} from '@/redux/modules/tokenSlice';
  
 
 const LoginForm: React.FC = () => {

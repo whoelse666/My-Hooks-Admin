@@ -1,27 +1,27 @@
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Avatar, Modal, Menu, Badge, Col, Row, Dropdown, message,Button,  } from 'antd';
+import { Avatar, Modal, Menu, Badge, Col, Row, Dropdown, message, Button, } from 'antd';
 import { useRef, useState } from 'react';
 import {
   setToken,
-} from '@/redux/reducers/tokenSlice';
+} from '@/redux/modules/tokenSlice';
 import type { MenuProps } from 'antd';
- 
+
 import * as Icons from "@ant-design/icons";
 
 // import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { updateCollapse } from "@/redux/modules/menu";
-import {   useDispatch, useSelector } from "@/redux";
+import { updateCollapse } from "@/redux/modules/menuSlice";
+import { useDispatch, useSelector } from "@/redux";
 
 
 const HOME_URL: string = "/";
 const Header: React.FC = () => {
-  	const dispatch = useDispatch();
-	const { isCollapse } = useSelector((state:any) => state.menu);
+  const dispatch = useDispatch();
+  const { isCollapse } = useSelector((state: any) => state.menu);
   const navigate = useNavigate();
   const toggleCollapsed = () => {
-   				dispatch(updateCollapse(!isCollapse));
+    dispatch(updateCollapse(!isCollapse));
 
   };
   // 退出登录
@@ -82,9 +82,9 @@ const Header: React.FC = () => {
   return (
     <Row>
       <Col span={1}>
-         <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
-        {isCollapse ? <Icons.MenuUnfoldOutlined /> : <Icons.MenuFoldOutlined />}
-      </Button>
+        <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
+          {isCollapse ? <Icons.MenuUnfoldOutlined /> : <Icons.MenuFoldOutlined />}
+        </Button>
       </Col>
       <Col span={1} offset={22}>
         <Dropdown menu={{ items }} placement="bottom" arrow trigger={["click"]}>

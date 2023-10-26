@@ -6,7 +6,7 @@ const menuState: MenuState = {
 	menuList: []
 };
 
-const menuSlice = createSlice({
+const menuSlice:any = createSlice({
 	name: "menu",
 	initialState: menuState,
 	reducers: {

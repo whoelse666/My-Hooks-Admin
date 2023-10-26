@@ -21,10 +21,8 @@ function App() {
         <ConfigProvider locale={i18nLocale} >
           <Router />
         </ConfigProvider>
-      </HashRouter>    </div>
-
-
-
+      </HashRouter>
+    </div>
   )
 }
 
