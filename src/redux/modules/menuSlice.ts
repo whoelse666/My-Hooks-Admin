@@ -1,28 +1,23 @@
 import { MenuState } from "@/redux/interface";
-import { createSlice, } from "@reduxjs/toolkit";
-import type { PayloadAction } from '@reduxjs/toolkit'
-
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const menuState: MenuState = {
-  isCollapse: false,
-  menuList: [],
+	isCollapse: false,
+	menuList: []
 };
 
-const menuSlice = createSlice({
-  name: "menu",
-  initialState: menuState,
-  reducers: {
-    updateCollapse(state: MenuState, { payload }: PayloadAction<boolean>) {
-      state.isCollapse = payload;
-    },
-    setMenuList(state: MenuState, { payload }: PayloadAction<Menu.MenuOptions[]>) {
-      state.menuList = payload;
-    }
-  }
+const menuSlice:any = createSlice({
+	name: "menu",
+	initialState: menuState,
+	reducers: {
+		updateCollapse(state: MenuState, { payload }: PayloadAction<boolean>) {
+			state.isCollapse = payload;
+		},
+		setMenuList(state: MenuState, { payload }: PayloadAction<Menu.MenuOptions[]>) {
+			state.menuList = payload;
+		}
+	}
+});
 
-})
-
-
-export const { setMenuList, updateCollapse } = menuSlice.actions
-export default menuSlice.reducer
+export default menuSlice.reducer;
+export const { updateCollapse, setMenuList } = menuSlice.actions;
