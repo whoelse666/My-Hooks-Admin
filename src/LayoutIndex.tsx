@@ -6,6 +6,7 @@ const { Header, Footer, Content } = Layout
 
 import '@/styles/layout.less';
 import HeaderCom from '@/views/header'
+import BreadcrumbCom from '@/components/Breadcrumb'
 import MenuTree from '@/views/menu'
 function LayoutIndex() {
   return (
@@ -13,7 +14,11 @@ function LayoutIndex() {
       <Layout>
         <MenuTree />
         <Layout>
-          <Header><HeaderCom /></Header>
+          <Header style={{height:'120px'}}>
+            <HeaderCom />
+            <BreadcrumbCom />
+            {/* <BreadcrumbCom items={breadcrumbItems} /> */}
+          </Header>
           <Content>
             <Outlet></Outlet>
           </Content>

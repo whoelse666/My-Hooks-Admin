@@ -80,28 +80,27 @@ const Header: React.FC = () => {
 
 
   return (
-    <Row>
-      <Col span={1}>
-        <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
-          {isCollapse ? <Icons.MenuUnfoldOutlined /> : <Icons.MenuFoldOutlined />}
-        </Button>
-      </Col>
-      <Col span={1} offset={22}>
-        <Dropdown menu={{ items }} placement="bottom" arrow trigger={["click"]}>
-          <Badge count={1}>
-            <Avatar style={{ backgroundColor: '#1677ff' }} icon={<UserOutlined />} />
-          </Badge>
-        </Dropdown>
-
-
-        <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
-
-      </Col>
-    </Row>
+  <>
+      <Row>
+        <Col span={1}>
+          <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
+            {isCollapse ? <Icons.MenuUnfoldOutlined /> : <Icons.MenuFoldOutlined />}
+          </Button>
+        </Col>
+        <Col span={1} offset={22}>
+          <Dropdown menu={{ items }} placement="bottom" arrow trigger={["click"]}>
+            <Badge count={1}>
+              <Avatar style={{ backgroundColor: '#1677ff' }} icon={<UserOutlined />} />
+            </Badge>
+          </Dropdown>
+          <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Modal>
+        </Col>
+      </Row>
+  </>
 
 
   );

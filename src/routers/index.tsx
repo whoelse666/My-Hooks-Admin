@@ -19,14 +19,12 @@ Object.keys(metaRouters).forEach(item => {
 
 console.log('routerArray', routerArray)
 export const rootRouter = [
-
   {
     path: "/",
     element: <LayoutIndex />,
   },
-
   {
-    path: "/home/index",
+    path: "/home/index", 
     element: <LayoutIndex />,
   },
   {
@@ -34,7 +32,7 @@ export const rootRouter = [
     element: <TodoList />,
   },
   {
-    path: "/login",
+    path: "/login", 
     element: <Login />,
     // element: <Navigate to="/login" />,
     // meta: {
