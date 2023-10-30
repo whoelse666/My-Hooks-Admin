@@ -7,7 +7,7 @@ const { Header, Footer, Content } = Layout
 import '@/styles/layout.less';
 import HeaderCom from '@/views/header'
 import BreadcrumbCom from '@/components/Breadcrumb'
-import MenuTree from '@/views/menu'
+import MenuTree from '@/components/menu'
 function LayoutIndex() {
   return (
     <>

@@ -8,17 +8,15 @@ import '@/styles/breadcrumb.less';
 
 const BreadcrumbDom: React.FC = () => {
   const location = useLocation();
-  // const pathSnippets = location.pathname.split('/').filter((i) => i);
-  const pathSnippets = [ '/home/index', 'detail']
-  console.log('location.pathname', location)
+  const pathSnippets = location.pathname.split('/').filter((i) => i);
+  console.log('location.pathname', location, pathSnippets)
   const breadcrumbNameMap: Record<string, string> = {
-    '/home/index': 'Application List',
-    '/home/index/detail': 'detail',
-    '/apps': 'Application List',
-    '/apps/1': 'Application1',
-    '/apps/2': 'Application2',
-    '/apps/1/detail': 'Detail',
-    '/apps/2/detail': 'Detail',
+    'home/index': 'homeIndex',
+     
+ 
+    'proTable': 'proTable',
+    'proTable/useHooks': 'useHooks',
+    'proTable/useComponent': 'useComponent',
   };
 
   const extraBreadcrumbItems = pathSnippets.map((_, index) => {
@@ -34,10 +32,10 @@ const BreadcrumbDom: React.FC = () => {
     {
       title: (<Link to="/">
         <HomeOutlined />
-        <span className='link-txt'>Application List</span>
+        <span className='link-txt'>Home</span>
       </Link>
       ),
-      key: '/home',
+      key: '/',
     },
   ].concat(extraBreadcrumbItems);
   return (
