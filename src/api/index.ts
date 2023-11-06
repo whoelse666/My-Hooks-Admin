@@ -29,6 +29,8 @@ const instance = axios.create({
   headers: { "X-Requested-With": "XMLHttpRequest" },
 })
 
+
+//  请求拦截
 instance.interceptors.request.use(
   function (config) {
     NProgress.start()
@@ -51,6 +53,9 @@ instance.interceptors.request.use(
   }
 )
 
+
+
+//  响应拦截
 instance.interceptors.response.use(
   function (response) {
     const { data } = response
