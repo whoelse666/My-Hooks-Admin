@@ -114,6 +114,8 @@ const MenuTree: React.FC = () => {
   const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => {
     const route = searchRoute(key, menuList);
     if (route.isLink) window.open(route.isLink, "_blank");
+    console.log('key', key)
+    // if (key === '/home/index') { key = '/' }
     navigate(key);
   };
 

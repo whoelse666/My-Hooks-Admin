@@ -12,8 +12,6 @@ const BreadcrumbDom: React.FC = () => {
   console.log('location.pathname', location, pathSnippets)
   const breadcrumbNameMap: Record<string, string> = {
     'home/index': 'homeIndex',
-     
- 
     'proTable': 'proTable',
     'proTable/useHooks': 'useHooks',
     'proTable/useComponent': 'useComponent',

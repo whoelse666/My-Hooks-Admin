@@ -3,8 +3,6 @@ import lazyLoad from "@/routers/utils/lazyLoad";
 import { LayoutIndex } from "@/routers/constant";
 import { RouteObject } from "@/routers/interface";
 
-
-
 // 常用组件
 const assemblyRouter: Array<RouteObject> = [
   {
