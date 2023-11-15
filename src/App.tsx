@@ -1,5 +1,4 @@
-import "./App.css"
-import Router from "@/routers/index";
+
 import { HashRouter } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
@@ -8,6 +7,8 @@ import i18n from "i18next";
 import "moment/dist/locale/zh-cn";
 import { useState } from "react";
 import { useDispatch, useSelector } from "@/redux";
+import "./App.css"
+import Router from "@/routers/index";
 // Route用来定义
 function App() {
   const dispatch = useDispatch();

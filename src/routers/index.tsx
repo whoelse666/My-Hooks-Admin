@@ -6,12 +6,8 @@ import TodoList from "@/views/demo/TodoList"
 import React from "react";
 import lazyLoad from "@/routers/utils/lazyLoad";
 
-
-
-
-import Layout from "@/Layout"
+// import Layout from "@/Layout"
 import { LayoutIndex } from "@/routers/constant";
-console.log( Layout)
 console.log( LayoutIndex)
 const homeRouter: Array<RouteObject> = [
   {
